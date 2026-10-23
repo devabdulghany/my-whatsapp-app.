@@ -6,16 +6,7 @@
   <title>واتساب الذكي</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    
-    html, body { 
-      width: 100%; 
-      height: 100%; 
-      height: 100dvh; 
-      background-color: #efeae2; 
-      overflow: hidden; 
-      position: fixed; 
-      top: 0; left: 0; right: 0; bottom: 0;
-    }
+    html, body { width: 100%; height: 100%; height: 100dvh; background-color: #efeae2; overflow: hidden; position: fixed; top: 0; left: 0; right: 0; bottom: 0; }
     
     #auth-screen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; background: #00a884; padding: 20px; }
     .auth-box { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 380px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; }
@@ -55,182 +46,35 @@
     .user-info { overflow: hidden; flex: 1; }
     .user-info h4 { color: #111b21; font-size: 16px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .user-info p { color: #667781; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 4px; }
-    .chat-meta { font-size: 11px; color: #667781; margin-right: 8px; flex-shrink: 0; text-align: left; }
 
-    .fab-btn {
-      position: absolute;
-      bottom: 25px;
-      left: 20px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #00a884;
-      color: white;
-      border: none;
-      font-size: 26px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
+    .fab-btn { position: absolute; bottom: 25px; left: 20px; width: 56px; height: 56px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 26px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 10; }
 
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 100;
-    }
-    .modal-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 380px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; padding: 20px; z-index: 100; }
+    .modal-box { background: white; padding: 20px; border-radius: 12px; width: 100%; max-width: 380px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .modal-box h4 { color: #075e54; margin-bottom: 8px; font-size: 17px; }
     .modal-box p { color: #667781; font-size: 13px; margin-bottom: 10px; }
-    
-    .registered-contacts-list {
-      max-height: 220px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-    .registered-contact-item {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #f0f0f0;
-      cursor: pointer;
-      gap: 10px;
-    }
+    .registered-contacts-list { max-height: 220px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px; }
+    .registered-contact-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer; gap: 10px; }
     .registered-contact-item:hover { background: #f5f5f5; }
-
     .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
     .modal-actions button { padding: 8px 16px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; }
     .btn-cancel { background: #f0f2f5; color: #111b21; }
 
-    /* نافذة عرض البروفايل (معاينة الحساب) */
-    #profile-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 400;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .profile-card {
-      background: white;
-      width: 100%;
-      max-width: 320px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      text-align: center;
-      padding-bottom: 20px;
-    }
-    .profile-card-header {
-      background: #075e54;
-      color: white;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .profile-big-avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: #dfe5e7;
-      margin: 20px auto 10px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 45px;
-      color: #075e54;
-      font-weight: bold;
-      overflow: hidden;
-      border: 3px solid #00a884;
-    }
-    .profile-big-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .profile-card h3 { color: #111b21; font-size: 20px; margin-bottom: 5px; }
-    .profile-card p { color: #667781; font-size: 14px; margin-bottom: 20px; }
-    .profile-card button { padding: 8px 25px; background: #00a884; color: white; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
-
-    .status-options-box {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      z-index: 250;
-      width: 90%;
-      max-width: 320px;
-      text-align: center;
-    }
-    .status-options-box button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 8px;
-      background: #00a884;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #status-viewer {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.95);
-      z-index: 300;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px;
-      color: white;
-    }
+    #status-viewer { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 300; flex-direction: column; justify-content: space-between; padding: 20px; color: white; }
     .status-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.3); border-radius: 2px; overflow: hidden; margin-bottom: 15px; }
     .status-progress-fill { width: 100%; height: 100%; background: white; animation: progressAnim 8s linear forwards; }
     @keyframes progressAnim { 0% { width: 0%; } 100% { width: 100%; } }
     .status-header { display: flex; align-items: center; justify-content: space-between; }
     .status-body { flex: 1; display: flex; justify-content: center; align-items: center; text-align: center; font-size: 22px; padding: 10px; word-break: break-word; }
     .status-body img, .status-body video { max-width: 100%; max-height: 60vh; border-radius: 8px; object-fit: contain; }
-    
-    .status-viewers-footer {
-      background: rgba(0,0,0,0.6);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      max-height: 120px;
-      overflow-y: auto;
-      text-align: right;
-    }
+    .status-viewers-footer { background: rgba(0,0,0,0.6); padding: 10px; border-radius: 8px; font-size: 13px; max-height: 120px; overflow-y: auto; text-align: right; }
 
     #chat-screen { display: none; flex-direction: column; height: 100%; width: 100%; background: #efeae2; position: relative; }
     .chat-header { background: #075e54; color: white; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-    .chat-header-left { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-    .back-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 0 4px; }
+    .chat-header-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .back-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 0 5px; }
     .header-status { color: #d1d7db; font-size: 11px; display: block; margin-top: 2px; }
     .header-status.online { color: #a7f3d0; font-weight: bold; }
-    
     .header-actions { display: flex; gap: 4px; align-items: center; }
     .action-header-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 8px; border-radius: 6px; font-size: 12px; cursor: pointer; }
 
@@ -241,79 +85,35 @@
     .msg.deleted { font-style: italic; color: #8696a0; background: #f0f2f5 !important; }
     .msg-img { max-width: 100%; max-height: 250px; border-radius: 8px; display: block; margin-bottom: 4px; cursor: pointer; object-fit: cover; }
     .msg-audio { width: 220px; height: 38px; margin-top: 4px; display: block; }
-    
     .msg-meta { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 4px; font-size: 10px; color: #667781; }
     .ticks { font-size: 12px; font-weight: bold; letter-spacing: -2px; color: #8696a0; }
     .ticks.read { color: #0095f6; }
 
-    #emoji-picker {
-      display: none;
-      position: absolute;
-      bottom: 65px;
-      left: 10px;
-      right: 10px;
-      height: 250px;
-      background: #f0f2f5;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
-      flex-direction: column;
-      z-index: 50;
-    }
+    #emoji-picker { display: none; position: absolute; bottom: 65px; left: 10px; right: 10px; height: 250px; background: #f0f2f5; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); flex-direction: column; z-index: 50; }
     .emoji-categories { display: flex; background: #e2e8f0; border-bottom: 1px solid #cbd5e1; padding: 6px; justify-content: space-around; font-size: 20px; cursor: pointer; }
     .emoji-grid { flex: 1; overflow-y: auto; padding: 10px; display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; align-content: start; text-align: center; }
     .emoji-item { font-size: 24px; cursor: pointer; padding: 2px; border-radius: 4px; }
     .emoji-item:active { background: #cbd5e1; }
 
-    .chat-input-box { 
-      padding: 8px 10px; 
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-      background: #f0f2f5; 
-      display: flex; 
-      align-items: center; 
-      gap: 6px; 
-      flex-shrink: 0; 
-      border-top: 1px solid #ddd;
-      position: relative;
-    }
+    .chat-input-box { padding: 8px 10px; padding-bottom: max(10px, env(safe-area-inset-bottom)); background: #f0f2f5; display: flex; align-items: center; gap: 6px; flex-shrink: 0; border-top: 1px solid #ddd; position: relative; }
     .icon-btn { background: white; color: #075e54; border: 1px solid #ddd; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
     .chat-input-box input[type="text"] { flex: 1; padding: 11px 14px; border: none; border-radius: 25px; outline: none; font-size: 15px; background: white; min-width: 0; }
     .send-btn { background: #00a884; color: white; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
     
-    #recording-bar {
-      display: none;
-      flex: 1;
-      align-items: center;
-      justify-content: space-between;
-      background: #fff;
-      padding: 6px 14px;
-      border-radius: 25px;
-      border: 1px solid #ff4d4d;
-    }
+    #recording-bar { display: none; flex: 1; align-items: center; justify-content: space-between; background: #fff; padding: 6px 14px; border-radius: 25px; border: 1px solid #ff4d4d; }
     .rec-timer { color: #d93025; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 6px; }
     .rec-dot { width: 10px; height: 10px; background: #d93025; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     .cancel-rec-btn { background: none; border: none; color: #667781; font-size: 14px; cursor: pointer; font-weight: bold; }
-
     .logout-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
 
-    #img-viewer {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.9);
-      z-index: 200;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+    #img-viewer { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 200; justify-content: center; align-items: center; flex-direction: column; }
     #img-viewer img { max-width: 95%; max-height: 85%; border-radius: 8px; }
     #img-viewer button { margin-top: 15px; padding: 8px 20px; background: white; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
   </style>
 </head>
 <body>
 
-  <!-- 1. شاشة تسجيل الدخول -->
   <div id="auth-screen">
     <div class="auth-box">
       <h2 id="auth-title">تسجيل الدخول</h2>
@@ -325,7 +125,6 @@
     </div>
   </div>
 
-  <!-- 2. الشاشة الرئيسية -->
   <div id="home-screen">
     <div class="app-header">
       <div class="header-profile" id="change-profile-btn" title="تغيير الصورة">
@@ -357,7 +156,6 @@
           <div class="user-left">
             <input type="file" id="status-img-input" accept="image/*" style="display: none;">
             <input type="file" id="status-vid-input" accept="video/*" style="display: none;">
-            
             <div class="avatar-wrap" id="add-status-trigger" style="cursor:pointer;" title="إضافة حالة">
               <div class="avatar" id="my-status-avatar">➕</div>
             </div>
@@ -375,16 +173,14 @@
     <button class="fab-btn" id="new-chat-btn" title="محادثة جديدة">💬</button>
   </div>
 
-  <!-- خيارات الحالة -->
-  <div class="status-options-box" id="status-options-box">
+  <div class="status-options-box" id="status-options-box" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:white; padding:15px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.3); z-index:250; width:90%; max-width:320px; text-align:center;">
     <h4 style="color:#075e54; margin-bottom:10px;">إضافة حالة جديدة ⭕</h4>
-    <button onclick="document.getElementById('status-img-input').click(); closeStatusOpts();">📷 مشاركة صورة</button>
-    <button onclick="document.getElementById('status-vid-input').click(); closeStatusOpts();">🎥 مشاركة مقطع فيديو</button>
-    <button onclick="publishTextStatusPrompt(); closeStatusOpts();">✏️ كتابة حالة نصية</button>
-    <button style="background:#667781;" onclick="closeStatusOpts();">إلغاء</button>
+    <button onclick="document.getElementById('status-img-input').click(); closeStatusOpts();" style="width:100%; padding:10px; margin:5px 0; border:none; border-radius:8px; background:#00a884; color:white; font-weight:bold; cursor:pointer;">📷 مشاركة صورة</button>
+    <button onclick="document.getElementById('status-vid-input').click(); closeStatusOpts();" style="width:100%; padding:10px; margin:5px 0; border:none; border-radius:8px; background:#00a884; color:white; font-weight:bold; cursor:pointer;">🎥 مشاركة مقطع فيديو</button>
+    <button onclick="publishTextStatusPrompt(); closeStatusOpts();" style="width:100%; padding:10px; margin:5px 0; border:none; border-radius:8px; background:#00a884; color:white; font-weight:bold; cursor:pointer;">✏️ كتابة حالة نصية</button>
+    <button style="width:100%; padding:10px; margin:5px 0; border:none; border-radius:8px; background:#667781; color:white; font-weight:bold; cursor:pointer;" onclick="closeStatusOpts();">إلغاء</button>
   </div>
 
-  <!-- شاشة عرض الحالة -->
   <div id="status-viewer">
     <div>
       <div class="status-progress-bar"><div class="status-progress-fill" id="status-progress"></div></div>
@@ -402,8 +198,7 @@
     </div>
   </div>
 
-  <!-- نافذة معاينة البروفايل (إلقاء نظرة على البروفايل) -->
-  <div id="profile-modal">
+  <div id="profile-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:400; justify-content:center; align-items:center; padding:20px;">
     <div class="profile-card">
       <div class="profile-card-header">
         <span>معلومات البروفايل</span>
@@ -416,7 +211,6 @@
     </div>
   </div>
 
-  <!-- نافذة اختيار جهات الاتصال -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal-box">
       <h4>اختر صديقاً للدردشة</h4>
@@ -425,15 +219,64 @@
         <p style="text-align:center; padding:15px; color:#667781; font-size:13px;">جاري التحقق من جهات الاتصال...</p>
       </div>
       <div class="modal-actions">
-        <button class="btn-cancel" id="close-modal-btn">إغلاق</button>
+        <button class="btn-cancel" id="close-modal-btn">إلغاء</button>
       </div>
     </div>
   </div>
 
-  <!-- 3. شاشة المحادثة الفورية -->
   <div id="chat-screen">
     <div class="chat-header">
       <div class="chat-header-left" id="open-profile-trigger" title="إلقاء نظرة على البروفايل">
         <button class="back-btn" id="back-btn">➔</button>
         <div style="display:flex; align-items:center; gap:6px;">
-          <div class="my-
+          <div class="my-avatar-container" id="chat-header-avatar" style="width:32px; height:32px;">👤</div>
+          <div>
+            <h4 id="chat-with-name" style="font-size:14px; text-decoration:underline; cursor:pointer;">اسم المستخدم</h4>
+            <small id="chat-with-status" class="header-status">جاري التحقق...</small>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="action-header-btn" id="block-user-btn" style="background:#dc2626;">حظر</button>
+        <button class="action-header-btn" id="clear-chat-btn">حذف</button>
+      </div>
+    </div>
+    
+    <div class="messages-area" id="messages-area"></div>
+    
+    <div class="chat-input-box">
+      <div id="emoji-picker">
+        <div class="emoji-categories">
+          <span onclick="switchCategory('faces')" title="الفيسات">😀</span>
+          <span onclick="switchCategory('gestures')" title="أيدي">👋</span>
+          <span onclick="switchCategory('hearts')" title="قلوب">❤️</span>
+          <span onclick="switchCategory('nature')" title="طبيعة">🐱</span>
+          <span onclick="switchCategory('food')" title="أطعمة">🍎</span>
+          <span onclick="switchCategory('travel')" title="مواصلات">🚗</span>
+          <span onclick="switchCategory('flags')" title="أعلام">🌍</span>
+        </div>
+        <div class="emoji-grid" id="emoji-grid-container"></div>
+      </div>
+
+      <input type="file" id="img-input" accept="image/*" style="display: none;">
+      <button class="icon-btn" id="emoji-toggle-btn" title="الرموز">😊</button>
+      <button class="icon-btn" id="img-btn" title="صورة">📷</button>
+      <button class="icon-btn" id="mic-btn" title="صوت">🎤</button>
+      <input type="text" id="msg-input" placeholder="اكتب رسالة...">
+      
+      <div id="recording-bar">
+        <div class="rec-timer"><span class="rec-dot"></span> <span id="rec-time-text">00:00</span></div>
+        <button class="cancel-rec-btn" id="cancel-rec-btn">🗑️</button>
+      </div>
+
+      <button class="send-btn" id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <div id="img-viewer">
+    <img id="viewer-src" src="" alt="صورة">
+    <button id="close-viewer">إغلاق ✕</button>
+  </div>
+
+  <script type="module">
+    import { init
